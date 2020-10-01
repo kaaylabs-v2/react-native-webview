@@ -592,6 +592,15 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
   protected void addEventEmitters(ThemedReactContext reactContext, WebView view) {
     // Do not register default touch emitter and let WebView implementation handle touches
     view.setWebViewClient(new RNCWebViewClient());
+    view.setWebViewClient(new WebViewClient() {
+      @Override
+      @RequiresApi(21)
+      public WebResourceResponse shouldInterceptRequest(WebView view,
+                                       WebResourceRequest request) {
+    System.out.println("from shouldInterceptRequest" + request.getUrl().toString());
+    return null;
+      }
+    });
   }
 
   @Override
@@ -794,20 +803,20 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
         emitFinishEvent(webView, url);
       }
     }
-    @Override
-     @RequiresApi(21)
-     public WebResourceResponse shouldInterceptRequest(WebView view,
-                                      WebResourceRequest request) {
+    // @Override
+    //  @RequiresApi(21)
+    //  public WebResourceResponse shouldInterceptRequest(WebView view,
+    //                                   WebResourceRequest request) {
 
-        final RNCWebView rncWebView = (RNCWebView) view;
-        final Pair<Integer, AtomicReference<ShouldOverrideCallbackState>> lock = RNCWebViewModule.shouldOverrideUrlLoadingLock.getNewLock();
-        final int lockIdentifier = lock.first;
-        final WritableMap event = createWebViewEvent(view, request.getUrl().toString());
-        event.putInt("lockIdentifier", lockIdentifier);
-        rncWebView.sendDirectMessage("onShouldStartLoadWithRequest", event);
-        System.out.println("from shouldInterceptRequest" + request.getUrl().toString());
-        return null;
-     }
+    //     final RNCWebView rncWebView = (RNCWebView) view;
+    //     final Pair<Integer, AtomicReference<ShouldOverrideCallbackState>> lock = RNCWebViewModule.shouldOverrideUrlLoadingLock.getNewLock();
+    //     final int lockIdentifier = lock.first;
+    //     final WritableMap event = createWebViewEvent(view, request.getUrl().toString());
+    //     event.putInt("lockIdentifier", lockIdentifier);
+    //     rncWebView.sendDirectMessage("onShouldStartLoadWithRequest", event);
+    //     System.out.println("from shouldInterceptRequest" + request.getUrl().toString());
+    //     return null;
+    //  }
 
     @Override
     public void onPageStarted(WebView webView, String url, Bitmap favicon) {
