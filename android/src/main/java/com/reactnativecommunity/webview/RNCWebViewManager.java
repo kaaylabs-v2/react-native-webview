@@ -799,7 +799,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
      public WebResourceResponse shouldInterceptRequest(WebView view,
                                       WebResourceRequest request) {
 
-        final WritableMap event = createWebViewEvent(view, request.getUrl());
+        final WritableMap event = createWebViewEvent(view, request.getUrl().toString());
         event.putInt("lockIdentifier", lockIdentifier);
         rncWebView.sendDirectMessage("onShouldStartLoadWithRequest", event);
          return assetLoader.shouldInterceptRequest(request.getUrl().toString());
