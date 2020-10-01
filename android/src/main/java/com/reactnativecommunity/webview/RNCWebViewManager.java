@@ -598,7 +598,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
       public WebResourceResponse shouldInterceptRequest(WebView view,
                                        WebResourceRequest request) {
     System.out.println("from shouldInterceptRequest" + request.getUrl().toString());
-    return null;
+    return super.shouldInterceptRequest(view, request)
       }
     });
   }
