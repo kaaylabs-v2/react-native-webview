@@ -770,10 +770,6 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
     }
   }
 
-  final WebViewAssetLoader assetLoader = new WebViewAssetLoader.Builder()
-  .addPathHandler("/assets/", new AssetsPathHandler(this))
-  .build();
-
   protected static class RNCWebViewClient extends WebViewClient {
 
     protected boolean mLastLoadFailed = false;
@@ -809,7 +805,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
         final WritableMap event = createWebViewEvent(view, request.getUrl().toString());
         event.putInt("lockIdentifier", lockIdentifier);
         rncWebView.sendDirectMessage("onShouldStartLoadWithRequest", event);
-         return assetLoader.shouldInterceptRequest(request.getUrl().toString());
+         return super.shouldInterceptRequest(request.getUrl().toString());
      }
 
     @Override
