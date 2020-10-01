@@ -805,7 +805,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
         final WritableMap event = createWebViewEvent(view, request.getUrl().toString());
         event.putInt("lockIdentifier", lockIdentifier);
         rncWebView.sendDirectMessage("onShouldStartLoadWithRequest", event);
-         return super.shouldInterceptRequest(request.getUrl().toString());
+         return null;
      }
 
     @Override
