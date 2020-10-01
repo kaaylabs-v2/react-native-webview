@@ -770,6 +770,10 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
     }
   }
 
+  final WebViewAssetLoader assetLoader = new WebViewAssetLoader.Builder()
+  .addPathHandler("/assets/", new AssetsPathHandler(this))
+  .build();
+
   protected static class RNCWebViewClient extends WebViewClient {
 
     protected boolean mLastLoadFailed = false;
@@ -798,6 +802,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
      @RequiresApi(21)
      public WebResourceResponse shouldInterceptRequest(WebView view,
                                       WebResourceRequest request) {
+
         final RNCWebView rncWebView = (RNCWebView) view;
         final Pair<Integer, AtomicReference<ShouldOverrideCallbackState>> lock = RNCWebViewModule.shouldOverrideUrlLoadingLock.getNewLock();
         final int lockIdentifier = lock.first;
