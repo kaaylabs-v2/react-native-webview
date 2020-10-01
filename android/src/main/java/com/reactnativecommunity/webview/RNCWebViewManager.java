@@ -802,19 +802,9 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
         final WritableMap event = createWebViewEvent(view, request.getUrl());
         event.putInt("lockIdentifier", lockIdentifier);
         rncWebView.sendDirectMessage("onShouldStartLoadWithRequest", event);
-         return assetLoader.shouldInterceptRequest(request.getUrl());
+         return assetLoader.shouldInterceptRequest(request.getUrl().toString());
      }
 
-     @Override
-     @SuppressWarnings("deprecation") // for API < 21
-     public WebResourceResponse shouldInterceptRequest(WebView view,
-                                      WebResourceRequest request) {
-
-        final WritableMap event = createWebViewEvent(view, request.getUrl());
-        event.putInt("lockIdentifier", lockIdentifier);
-        rncWebView.sendDirectMessage("onShouldStartLoadWithRequest", event);
-         return assetLoader.shouldInterceptRequest(Uri.parse(request));
-     }
     @Override
     public void onPageStarted(WebView webView, String url, Bitmap favicon) {
       super.onPageStarted(webView, url, favicon);
