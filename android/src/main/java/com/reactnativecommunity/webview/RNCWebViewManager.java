@@ -798,7 +798,8 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
      @RequiresApi(21)
      public WebResourceResponse shouldInterceptRequest(WebView view,
                                       WebResourceRequest request) {
-
+        final Pair<Integer, AtomicReference<ShouldOverrideCallbackState>> lock = RNCWebViewModule.shouldOverrideUrlLoadingLock.getNewLock();
+        final int lockIdentifier = lock.first;
         final WritableMap event = createWebViewEvent(view, request.getUrl().toString());
         event.putInt("lockIdentifier", lockIdentifier);
         rncWebView.sendDirectMessage("onShouldStartLoadWithRequest", event);
