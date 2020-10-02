@@ -597,7 +597,27 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
       @RequiresApi(21)
       public WebResourceResponse shouldInterceptRequest(WebView view,
                                        WebResourceRequest request) {
-    System.out.println("from shouldInterceptRequest" + request.getUrl().toString());
+    String url = request.getUrl().toString();
+    String key = "http://localhost:8080/";
+    WebResourceResponse response = null;
+    System.out.println("from shouldInterceptRequest" + url);
+
+    if (url.contains(key)) {
+        try {
+            String imgPath = url.replace(key,"file:///data/user/0/com.kaaylabs.webviewadplayer/files/www/");
+            imgPath = Uri.parse(imgPath).getPath();
+            InputStream localCopy = new FileInputStream(imgPath);
+            //Currently only for pictures
+            if (url.substring(url.length()-3) === "mp4")
+              response = new WebResourceResponse("video/mp4", "UTF-8", localCopy);
+            else
+              response = new WebResourceResponse("image/png", "UTF-8", localCopy);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
     return super.shouldInterceptRequest(view, request);
       }
     });
