@@ -608,7 +608,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
             imgPath = Uri.parse(imgPath).getPath();
             InputStream localCopy = new FileInputStream(imgPath);
             //Currently only for pictures
-            if (url.substring(url.length()-3) === "mp4")
+            if (url.substring(url.length()-3).equals("mp4"))
               response = new WebResourceResponse("video/mp4", "UTF-8", localCopy);
             else
               response = new WebResourceResponse("image/png", "UTF-8", localCopy);
