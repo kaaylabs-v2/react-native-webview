@@ -602,7 +602,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
       public WebResourceResponse shouldInterceptRequest(WebView view,
                                        WebResourceRequest request) {
     String url = request.getUrl().toString();
-    String key = "http://localhost:8080/";
+    String key = "https://appassets.androidplatform.net/";
     WebResourceResponse response = null;
     System.out.println("from shouldInterceptRequest" + url);
 
