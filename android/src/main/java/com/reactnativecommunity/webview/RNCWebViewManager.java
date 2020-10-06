@@ -617,7 +617,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
             if (url.substring(url.length()-3).equals("mp4")) {
               response = new WebResourceResponse("video/mp4", "UTF-8", localCopy);
             }
-            else if (url.substring(url.length()-3).equals("ogv") {
+            else if (url.substring(url.length()-3).equals("ogv")) {
               response = new WebResourceResponse("video/ogg", "UTF-8", localCopy);
             }
             else
