@@ -609,12 +609,16 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
     if (url.contains(key)) {
         try {
             String imgPath = url.replace(key,"file:///storage/emulated/0/Android/data/com.kaaylabs.webviewadplayer/files/www/");
+            /storage/emulated/0/Android/data/com.kaaylabs.webviewadplayer/files/www/344.ogv
             imgPath = Uri.parse(imgPath).getPath();
             InputStream localCopy = new FileInputStream(imgPath);
             //Currently only for pictures
-            System.out.println("before if" + url.substring(url.length()-3));
+            System.out.println("before if" + url);
             if (url.substring(url.length()-3).equals("mp4")) {
               response = new WebResourceResponse("video/mp4", "UTF-8", localCopy);
+            }
+            else if ( if (url.substring(url.length()-3).equals("ogv")) {
+              response = new WebResourceResponse("video/ogv", "UTF-8", localCopy);
             }
             else
               response = new WebResourceResponse("image/png", "UTF-8", localCopy);
