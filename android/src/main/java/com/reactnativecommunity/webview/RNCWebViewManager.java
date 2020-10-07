@@ -192,11 +192,11 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
     settings.setBuiltInZoomControls(true);
     settings.setDisplayZoomControls(false);
     settings.setDomStorageEnabled(true);
-    settings.setAllowFileAccess(false);
-    settings.setAllowContentAccess(false);
+    settings.setAllowFileAccess(true);
+    settings.setAllowContentAccess(true);
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-      settings.setAllowFileAccessFromFileURLs(false);
-      setAllowUniversalAccessFromFileURLs(webView, false);
+      settings.setAllowFileAccessFromFileURLs(true);
+      setAllowUniversalAccessFromFileURLs(webView, true);
     }
     setMixedContentMode(webView, "always");
 
