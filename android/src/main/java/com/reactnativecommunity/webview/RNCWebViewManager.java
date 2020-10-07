@@ -602,7 +602,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
       public WebResourceResponse shouldInterceptRequest(WebView view,
                                        WebResourceRequest request) {
     String url = request.getUrl().toString();
-    String key = "https://appassets.androidplatform.net/";
+    String key = "http://localhost:8080/";
     WebResourceResponse response = null;
     System.out.println("from shouldInterceptRequest" + url);
 
@@ -612,7 +612,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
             imgPath = Uri.parse(imgPath).getPath();
             InputStream localCopy = new FileInputStream(imgPath);
             //Currently only for pictures
-            System.out.println("before if " + url + localCopy.available());
+            System.out.println("before if " + url +  " - " + localCopy.available());
             if (url.substring(url.length()-3).equals("mp4")) {
               response = new WebResourceResponse("video/mp4", "UTF-8", localCopy);
             }
