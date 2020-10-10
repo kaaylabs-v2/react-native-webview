@@ -602,7 +602,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
       public WebResourceResponse shouldInterceptRequest(WebView view,
                                        WebResourceRequest request) {
     String url = request.getUrl().toString();
-    String key = "http://localhost:8080/";
+    String key = "https://appassets.androidplatform.net/";
     WebResourceResponse response = null;
     System.out.println("from shouldInterceptRequest" + url);
 
@@ -867,6 +867,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
       final RNCWebView rncWebView = (RNCWebView) view;
       final boolean isJsDebugging = ((ReactContext) view.getContext()).getJavaScriptContextHolder().get() == 0;
+      System.out.println("from shouldOverrideUrlLoading old " + url);
 
       if (!isJsDebugging && rncWebView.mCatalystInstance != null) {
         final Pair<Integer, AtomicReference<ShouldOverrideCallbackState>> lock = RNCWebViewModule.shouldOverrideUrlLoadingLock.getNewLock();
@@ -916,6 +917,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
       final String url = request.getUrl().toString();
+      System.out.println("from shouldOverrideUrlLoading " + url);
       return this.shouldOverrideUrlLoading(view, url);
     }
 
