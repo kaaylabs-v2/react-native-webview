@@ -612,8 +612,12 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
             InputStream localCopy = new FileInputStream(imgPath);
             //Currently only for pictures
             System.out.println("before if " + imgPath +  " - " + localCopy.available());
+            int statusCode = 200;
+            String reasonPhase = "OK";
+            Map<String, String> responseHeaders = new HashMap<String, String>();
+            responseHeaders.put("Access-Control-Allow-Origin", "*");
             if (url.substring(url.length()-3).equals("mp4")) {
-              response = new WebResourceResponse("video/*", "UTF-8", localCopy);
+              response = new WebResourceResponse("video/*", "UTF-8", statusCode, reasonPhase, responseHeaders, localCopy);
 
             }
             else if (url.substring(url.length()-3).equals("ogv")) {
