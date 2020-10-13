@@ -612,12 +612,8 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
             InputStream localCopy = new FileInputStream(imgPath);
             //Currently only for pictures
             System.out.println("before if " + imgPath +  " - " + localCopy.available());
-            int statusCode = 200;
-            String reasonPhase = "OK";
-            Map<String, String> responseHeaders = new HashMap<String, String>();
-            responseHeaders.put("Access-Control-Allow-Origin", "*");
             if (url.substring(url.length()-3).equals("mp4")) {
-              response = new WebResourceResponse("video/*", "UTF-8", statusCode, reasonPhase, responseHeaders, localCopy);
+              response = new WebResourceResponse("video/*", "UTF-8", localCopy);
 
             }
             else if (url.substring(url.length()-3).equals("ogv")) {
@@ -632,7 +628,6 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
         }
         return response;  
     }
-    System.out.println("Returning original url for " + url);
     return super.shouldInterceptRequest(view, request);
       }
     
