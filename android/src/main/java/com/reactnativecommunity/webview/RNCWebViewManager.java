@@ -613,7 +613,8 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
             //Currently only for pictures
             System.out.println("before if " + imgPath +  " - " + localCopy.available());
             if (url.substring(url.length()-3).equals("mp4")) {
-              response = new WebResourceResponse("video/mp4", "UTF-8", localCopy);
+              response = new WebResourceResponse("video/*", "UTF-8", localCopy);
+
             }
             else if (url.substring(url.length()-3).equals("ogv")) {
               response = new WebResourceResponse("video/ogg", "UTF-8", localCopy);
@@ -629,10 +630,26 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
     }
     return super.shouldInterceptRequest(view, request);
       }
+    
+      @SuppressWarnings("deprecation")
+      @Override
+      public boolean shouldOverrideUrlLoading(WebView view, String url) {
+          System.out.println("from shouldOverrideUrlLoading old  - " + url)
+          final Uri uri = Uri.parse(url);
+          return handleUri(uri);
+      }
+  
+      @TargetApi(Build.VERSION_CODES.N)
+      @Override
+      public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+          final Uri uri = request.getUrl();
+          System.out.println("from shouldOverrideUrlLoading new  - " + uri.toString())
+          return handleUri(uri);
+      }
     });
   }
 
-  @Override
+  @Override 
   public Map getExportedCustomDirectEventTypeConstants() {
     Map export = super.getExportedCustomDirectEventTypeConstants();
     if (export == null) {
