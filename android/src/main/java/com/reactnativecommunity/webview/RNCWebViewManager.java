@@ -636,7 +636,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
       public boolean shouldOverrideUrlLoading(WebView view, String url) {
           System.out.println("from shouldOverrideUrlLoading old  - " + url);
           final Uri uri = Uri.parse(url);
-          return handleUri(uri);
+          return true;
       }
   
       @TargetApi(Build.VERSION_CODES.N)
@@ -644,7 +644,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
       public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
           final Uri uri = request.getUrl();
           System.out.println("from shouldOverrideUrlLoading new  - " + uri.toString());
-          return handleUri(uri);
+          return true;
       }
     });
   }
