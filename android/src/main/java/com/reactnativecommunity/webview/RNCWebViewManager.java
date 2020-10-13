@@ -628,6 +628,7 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
         }
         return response;  
     }
+    System.out.println("Returning original url for " + url);
     return super.shouldInterceptRequest(view, request);
       }
     
